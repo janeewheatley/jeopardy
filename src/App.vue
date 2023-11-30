@@ -85,6 +85,7 @@ import NextComponent from "@/components/NextComponent.vue";
 import CounterComponent from "@/components/CounterComponent.vue";
 import { useClueStore } from "./stores/ClueStore";
 import { useCounterStore } from "./stores/CounterStore";
+import axios from "axios";
 
 export default {
   components: {
@@ -109,13 +110,12 @@ export default {
       this.displayAnswer = true;
       const store = useClueStore();
       const counterStore = useCounterStore();
-      
+
       this.disableSubmitBtn = true;
       this.alreadyAnswered = true;
       this.disableTextField = true;
       this.disableNextBtn = false;
       counterStore.incrementCounterTotal();
-
 
       if (!this.compareResponses(userAnswerValue, store.response)) {
         this.responseValid = false;
@@ -150,7 +150,6 @@ export default {
       this.disableTextField = false;
       this.disableSubmitBtn = true;
       this.disableNextBtn = true;
-
     },
 
     compareResponses(userAnswer, realAnswer) {
@@ -166,6 +165,17 @@ export default {
   },
   mounted() {
     useClueStore().fetchClues();
+    axios
+      .post("http://localhost:3000/sign_in", {
+        email: "jelwheatley@gmail.com",
+        password: "Password",
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   },
 };
 </script>

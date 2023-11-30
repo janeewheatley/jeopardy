@@ -66,6 +66,7 @@ export default {
       this.userAnswerValue = "";
     },
   },
+  //vue reacts to a change on a variable.
   computed: {
     formInvalid() {
       return this.userAnswerValue == "";
