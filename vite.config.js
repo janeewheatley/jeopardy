@@ -5,6 +5,8 @@ import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  outputDir: "../public",
+  indexPath: "../app/views/welcome/index.html.erb",
   plugins: [vue()],
   resolve: {
     alias: {
